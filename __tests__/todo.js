@@ -1,65 +1,63 @@
 /* eslint-disable no-undef */
+
 const todoList = require("../todo");
-let today = new Date().toLocaleDateString("en-CA");
-
 const { all, markAsComplete, add, overdue, dueToday, dueLater } = todoList();
-
-describe("Todolist Testing", () => {
+let today = new Date().toISOString().split("T")[0];
+// eslint-disable-next-line no-undef
+describe("Todo Test suite", () => {
+  // eslint-disable-next-line no-undef
   beforeAll(() => {
     add({
-      title: "DAA algorithums",
+      title: "Test todo",
       completed: false,
       dueDate: new Date().toLocaleDateString("en-CA"),
     });
   });
-
-  test("Add a new todo in list", () => {
-    // expect(all.length).toBe(0);
-
-    let length = all.length;
-
+  // eslint-disable-next-line no-undef
+  test("Add new todo", () => {
+    const todoItemCount = all.length;
     add({
-      title: "node js learning",
+      title: "Trail todo",
       completed: false,
       dueDate: new Date().toLocaleDateString("en-CA"),
     });
-
-    expect(all.length).toBe(length + 1);
+    // eslint-disable-next-line no-undef
+    expect(all.length).toBe(todoItemCount + 1);
   });
-
-  test("Mark todo as a completed", () => {
+  // eslint-disable-next-line no-undef
+  test("should mark a todo as completed", () => {
+    // eslint-disable-next-line no-undef
     expect(all[0].completed).toBe(false);
     markAsComplete(0);
+
     expect(all[0].completed).toBe(true);
   });
-
-  test("retrive all todos that are overdue", () => {
-    let listOfTodos = overdue();
+  test("todos they are overdue", () => {
+    let overdue = overdue();
 
     expect(
-      listOfTodos.every((todo) => {
+      overdue.every((todo) => {
         return todo.dueDate < today;
       })
-    ).toBe(true);
-  });
+    ).toBe(true);});
+test("todos that are duetoday", () => {
+        let duetoday = dueToday();
+    
+        expect(
+          duetoday.every((todo) => {
+            return todo.dueDate == today;
+          })
+        ).toBe(true);
 
-  test("retrive all todos that are dueToday", () => {
-    let listOfTodos = dueToday();
+  });
+  test("todos are duelater", () => {
+    let duelater = dueLater();
 
     expect(
-      listOfTodos.every((todo) => {
-        return todo.dueDate === today;
-      })
-    ).toBe(true);
-  });
-
-  test("retrive all todos that are dueLater", () => {
-    let listOfTodos = dueLater();
-
-    expect(
-      listOfTodos.every((todo) => {
+      duelater.every((todo) => {
         return todo.dueDate > today;
       })
     ).toBe(true);
-  });
+
+});
 });

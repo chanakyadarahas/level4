@@ -8,7 +8,7 @@ describe("Todo Test suite", () => {
   // eslint-disable-next-line no-undef
   beforeAll(() => {
     add({
-      title: "Test todo",
+      title: "Testing todo",
       completed: false,
       dueDate: new Date().toLocaleDateString("en-CA"),
     });
@@ -17,7 +17,7 @@ describe("Todo Test suite", () => {
   test("Add new todo", () => {
     const todoItemCount = all.length;
     add({
-      title: "Trail todo",
+      title: "Testing todo",
       completed: false,
       dueDate: new Date().toLocaleDateString("en-CA"),
     });
@@ -40,7 +40,7 @@ describe("Todo Test suite", () => {
         return todo.dueDate < today;
       })
     ).toBe(true);});
-test("todos that are duetoday", () => {
+test("todo that are duetoday", () => {
         let duetoday = dueToday();
     
         expect(
